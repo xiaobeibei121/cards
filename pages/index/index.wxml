@@ -11,7 +11,23 @@
       <view class="nav-title"><text>中国银行</text></view>
     </scroll-view>
   </view>
-
+  <view class="time-view">
+    <text>今天</text>
+  </view>
+  <view class="list-view">
+    <view class="list-banner">
+      <view class="list-title"><text>推荐</text></view>
+      <view class="list-detail">
+        <view class="dot"></view>
+        <view class="list-text">
+          <text>2018年9月1日-9月30日，每周五、六、日上午10点起，用户使用银联二维码支付（云闪付APP、指定银行APP），在指定超市购物可享受满99立减20元优惠，活动期间限2515000个优惠名额，每人每活动日限享1次，先到先得，满额为止。</text>
+        </view>
+      </view>
+      <view class="list-detail">
+        <text>2018年9月1日-9月30日，每周五、六、日上午10点起，用户使用银联二维码支付（云闪付APP、指定银行APP），在指定超市购物可享受满99立减20元优惠，活动期间限2515000个优惠名额，每人每活动日限享1次，先到先得，满额为止。</text>
+      </view>
+    </view>
+  </view>
 
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo"> 获取头像昵称 </button>
