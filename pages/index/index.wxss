@@ -1,0 +1,30 @@
+.nav-banner{
+  width: 100%;
+  height: 80rpx;
+}
+
+.scroll-view_H{
+  height: 80rpx;
+  font-size: 0;
+  overflow:hidden;
+  white-space:nowrap;
+}
+
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.nav-title{
+  width: 150rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  display: inline-block;
+}
+
+.nav-title.active{
+  font-weight: bold;
+}

@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="nav-banner">
+    <scroll-view class="scroll-view_H" scroll-x>
+      <view class="nav-title active"><text>全部</text></view>
+      <view class="nav-title"><text>招商银行</text></view>
+      <view class="nav-title"><text>光大银行</text></view>
+      <view class="nav-title"><text>工商银行</text></view>
+      <view class="nav-title"><text>广发银行</text></view>
+      <view class="nav-title"><text>农业银行</text></view>
+      <view class="nav-title"><text>中国银行</text></view>
+    </scroll-view>
+  </view>
+
+
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view>
+</view>
