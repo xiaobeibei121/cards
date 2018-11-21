@@ -1,0 +1,12 @@
+<!--pages/components/banner/banner.wxml-->
+<view class="list-view">
+    <view class="list-banner" wx:key="tag" wx:for="{{details}}" wx:for-item="detail">
+      <view class="list-title" id="item{{detail.tag}}" wx:if="{{tag==99}}"><text>{{detail.name}}</text></view>
+      <view class="list-detail" wx:key="index" wx:for="{{detail.messages}}" wx:for-item="message">
+        <view class="dot"></view>
+        <view class="list-text">
+          <text>{{message}}</text>
+        </view>
+      </view>
+    </view>
+  </view>

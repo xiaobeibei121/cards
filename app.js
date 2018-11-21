@@ -1,11 +1,7 @@
 //app.js
+import Api from '/utils/api.js';
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
     const that = this;
     // 登录
     wx.login({
@@ -14,13 +10,15 @@ App({
         // 获取openid
         // wx.request({
         //   method: 'GET',
-        //   url: 'https://www.bppproject.com/openid',
+        //   url: Api.getOpenid,
         //   data: {code: res.code},
         //   header: {
         //     'content-type': 'application/json' // 默认值
         //   },
-        //   success(res) {
-        //     that.globalData.openid = res.data.data;
+        //   success(response) {
+        //     const res = response.data;
+        //     that.globalData.openid = res.data.openid;
+        //     that.globalData.isExistUser = res.data.isExistUser;
         //     that.getUserInfo();
         //   }
         // });
@@ -37,7 +35,7 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo;
-
+              this.upUserInfo();
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -51,20 +49,38 @@ App({
   },
   upUserInfo: function () {
     const that = this;
-    // 上传用户信息
-    wx.request({
-      method: 'PUT',
-      url: 'https://www.bppproject.com/user',
-      data: { ...that.globalData.userInfo, openid: that.globalData.openid },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {
-        console.log(res.data);
-      }
-    });
+    const isExistUser = that.globalData.isExistUser;
+    if (!isExistUser) {
+      // 上传用户信息
+      wx.request({
+        method: 'PUT',
+        url: Api.user,
+        data: { ...that.globalData.userInfo, openid: that.globalData.openid },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+          console.log(res.data);
+        }
+      });
+    } else { // 更新用户信息
+      // 上传用户信息
+      wx.request({
+        method: 'POST',
+        url: Api.user + '?openid='+that.globalData.openid,
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success(res) {
+          console.log(res.data);
+        }
+      });
+    }
+    
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    openid: null,
+    isExistUser: 0
   }
 })

@@ -1,42 +1,46 @@
 <!--index.wxml-->
 <view class="container">
+  <!--nav滑动部分-->
   <view class="nav-banner">
     <scroll-view class="scroll-view_H" scroll-x>
-      <view class="nav-title active"><text>全部</text></view>
-      <view class="nav-title"><text>招商银行</text></view>
-      <view class="nav-title"><text>光大银行</text></view>
-      <view class="nav-title"><text>工商银行</text></view>
-      <view class="nav-title"><text>广发银行</text></view>
-      <view class="nav-title"><text>农业银行</text></view>
-      <view class="nav-title"><text>中国银行</text></view>
+      <view class="nav-title {{tag==99?'active':''}}" data-tag="99" bindtap="navTap"><text>全部</text></view>
+      <view class="nav-title {{tag==item.tag?'active':''}}" data-tag="{{item.tag}}" wx:key="{{item.tag}}" bindtap="navTap" wx:if="{{item.tag!=0}}" wx:for="{{details}}"><text>{{item.name}}</text></view>
     </scroll-view>
   </view>
-  <view class="time-view">
-    <text>今天</text>
-  </view>
-  <view class="list-view">
-    <view class="list-banner">
-      <view class="list-title"><text>推荐</text></view>
-      <view class="list-detail">
+  <scroll-view scroll-y class="scroll-list" scroll-into-view="{{toView}}" scroll-with-animation>
+    <!--时间部分-->
+    <view id="item99" class="time-view">
+      <text>今天</text>
+    </view>
+
+    <!--列表部分-->
+    <!-- <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="{{tag}}"></template-banner> -->
+    <view class="list-view">
+    <view class="list-banner" id="item{{detail.tag}}" wx:key="tag" wx:for="{{details}}" wx:for-item="detail">
+      <view class="list-title" wx:if="{{tag==99}}"><text>{{detail.name}}</text></view>
+      <view class="list-detail" wx:key="index" wx:for="{{detail.messages}}" wx:for-item="message">
         <view class="dot"></view>
         <view class="list-text">
-          <text>2018年9月1日-9月30日，每周五、六、日上午10点起，用户使用银联二维码支付（云闪付APP、指定银行APP），在指定超市购物可享受满99立减20元优惠，活动期间限2515000个优惠名额，每人每活动日限享1次，先到先得，满额为止。</text>
+          <text>{{message}}</text>
         </view>
-      </view>
-      <view class="list-detail">
-        <text>2018年9月1日-9月30日，每周五、六、日上午10点起，用户使用银联二维码支付（云闪付APP、指定银行APP），在指定超市购物可享受满99立减20元优惠，活动期间限2515000个优惠名额，每人每活动日限享1次，先到先得，满额为止。</text>
       </view>
     </view>
   </view>
 
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="onGotUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
-  </view>
+    <!--列表无数据的情况-->
+    <view wx:if="{{details.length == 0}}" class="no-data">
+      <text>sorry，管理员约会去了~</text>
+    </view>
+
+    <!--卡片部分-->
+    <template-card wx:if="{{details.length != 0}}"></template-card>
+
+    <!--历史文章-->
+    <view class="history-view" bindtap="toHistory">
+      <text>历史文章</text>
+      <image bindtap="toHistory" class="next-icon card" mode="aspectFill" src="../../images/next.png"></image>
+    </view>
+
+    <view class="bottom-view"></view>
+  </scroll-view>
 </view>

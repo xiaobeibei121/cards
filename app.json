@@ -1,12 +1,12 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/history/history"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "刷卡指南",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }

@@ -1,0 +1,39 @@
+.list-view {
+  padding: 40rpx 30rpx;
+  font-size: 0;
+  background-color: #fff;
+}
+
+.list-banner {
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 40rpx;
+}
+
+.list-banner:last-child{
+  border-bottom: none;
+}
+
+.list-banner .list-title{
+  font-size: 32rpx;
+  margin-bottom: 30rpx;
+}
+
+.list-banner .list-detail{
+  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-banner .list-text{
+  font-size: 28rpx;
+  width: 650rpx;
+}
+
+.dot{
+  display: inline-block;
+  width: 16rpx;
+  height: 16rpx;
+  background-color: #333;
+  border-radius: 50%;
+  margin-top: 10rpx;
+}

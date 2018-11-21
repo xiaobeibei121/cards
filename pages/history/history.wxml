@@ -1,0 +1,27 @@
+<!--pages/history/history.wxml-->
+<view class="container">
+  <!--nav滑动部分-->
+  <view class="nav-banner">
+    <scroll-view class="scroll-view_H" scroll-x>
+      <view class="nav-title {{curDate==item.formatDate?'active':''}}" data-date="{{item.formatDate}}" wx:key="{{item.formatDate}}" bindtap="navTap" wx:for="{{dates}}"><text>{{item.formatDay}}</text></view>
+    </scroll-view>
+  </view>
+
+  <!--时间部分-->
+  <view class="time-view">
+    <text>{{curDateText}}</text>
+  </view>
+
+  <!--列表部分-->
+  <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="99"></template-banner>
+
+  <!--列表无数据的情况-->
+  <view wx:if="{{details.length == 0}}" class="no-data">
+    <text>sorry，管理员约会去了~</text>
+  </view>
+
+  <!--卡片部分-->
+  <template-card wx:if="{{details.length != 0}}"></template-card>
+
+</view>
+  
