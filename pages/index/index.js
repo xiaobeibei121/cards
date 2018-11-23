@@ -1,5 +1,6 @@
 //index.js
 import Api from '../../utils/api.js';
+import Utils from '../../utils/util.js';
 
 const app = getApp()
 
@@ -43,6 +44,7 @@ Page({
         if (res.errorCode === 0) {
           that.setData({ details: res.data.details});
         }
+        console.log(JSON.stringify(res.data.details))
       }
     });
   },
@@ -52,8 +54,6 @@ Page({
    */
   navTap: function (event) {
     const tag = event.currentTarget.dataset.tag;
-    // this.setData({tag: tag});
-    // this.getMains();
     this.setData({ toView: "item" + tag });
   },
 
@@ -65,4 +65,27 @@ Page({
       url: '../history/history'
     });
   },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function (res) {
+    return {
+      path: '/pages/index/index'
+    }
+  },
+
+  /**
+   * 生成卡片分享
+   */
+  toShareCard: function () {
+    const curDate = new Date();
+    wx.setStorage({
+      key: 'details',
+      data: { date: Utils.formatDay(curDate), details:this.data.details}
+    });
+    wx.navigateTo({
+      url: '../share/share'
+    });
+  }
 })

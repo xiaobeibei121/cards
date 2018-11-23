@@ -33,7 +33,7 @@
     </view>
 
     <!--卡片部分-->
-    <template-card wx:if="{{details.length != 0}}"></template-card>
+    <template-card wx:if="{{details.length != 0}}" bindmyevent="toShareCard"></template-card>
 
     <!--历史文章-->
     <view class="history-view" bindtap="toHistory">

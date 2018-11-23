@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="list-view">
+    <!--时间部分-->
+    <view class="time-view">
+      <text>{{curDateText}}日刷卡指南</text>
+    </view>
+
+    <!--列表部分-->
+    <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="99"></template-banner>
+
+    <!--长按识别二维码-->
+    <!-- <view class="qr-view">
+      <image class="qr-icon" mode="aspectFill" src="../../images/pen.png"></image>
+      <view><text>长按识别，进入刷卡指南</text></view>
+    </view> -->
+  </view>
+  <canvas class="canvas" style="width: {{screenWidth}}px; height: {{listHeight}}px;" canvas-id="firstCanvas"></canvas>
+
+    <!--保存图片按钮-->
+    <view class="save-view" bindtap="drawImage">
+      <text>保存图片</text>
+    </view>
+</view>

@@ -7,11 +7,16 @@
 }
 .card-banner{
   width: 250rpx;
-  height: 120rpx;
+  /* height: 120rpx; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  background: none;
+}
+
+.card-banner::after{
+  border: none;
 }
 
 .card-icon{

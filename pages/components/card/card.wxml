@@ -1,15 +1,15 @@
 <!--pages/components/card/card.wxml-->
 <view class="card-view">
-  <view class="card-banner">
+  <button class="card-banner" open-type="share">
     <image class="card-icon" mode="aspectFill" src="../../../images/wechat.png"></image>
     <view class="card-title"><text>分享给朋友看看</text></view>
-  </view>
-  <view class="card-banner">
+  </button>
+  <button class="card-banner" bindtap="toShareCard">
     <image class="card-icon card" mode="aspectFill" src="../../../images/card.png"></image>
     <view class="card-title"><text>生成卡片分享</text></view>
-  </view>
-  <view class="card-banner">
+  </button>
+  <button class="card-banner">
     <image class="card-icon pen" mode="aspectFill" src="../../../images/pen.png"></image>
     <view class="card-title"><text>帮助我们改进</text></view>
-  </view>
+  </button>
 </view>
