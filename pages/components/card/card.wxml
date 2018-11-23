@@ -8,7 +8,7 @@
     <image class="card-icon card" mode="aspectFill" src="../../../images/card.png"></image>
     <view class="card-title"><text>生成卡片分享</text></view>
   </button>
-  <button class="card-banner">
+  <button class="card-banner" open-type="contact">
     <image class="card-icon pen" mode="aspectFill" src="../../../images/pen.png"></image>
     <view class="card-title"><text>帮助我们改进</text></view>
   </button>

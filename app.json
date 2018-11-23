@@ -1,9 +1,8 @@
 {
   "pages": [
-    "pages/share/share",
     "pages/index/index",
-    "pages/history/history",
-    "pages/suggest/suggest"
+    "pages/share/share",
+    "pages/history/history"
   ],
   "window": {
     "backgroundTextStyle": "light",
