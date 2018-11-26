@@ -1,23 +1,36 @@
 <view class="container">
-  <view class="list-view">
+  <view class="content-view {{contentClass}}">
     <!--时间部分-->
     <view class="time-view">
       <text>{{curDateText}}日刷卡指南</text>
     </view>
 
     <!--列表部分-->
-    <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="99"></template-banner>
+    <!-- <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="99"></template-banner> -->
+
+    <view class="list-view" wx:if="{{details.length != 0}}">
+      <view class="list-banner" wx:key="tag" wx:for="{{details}}" wx:for-item="detail">
+        <view class="list-title" id="item{{detail.tag}}"><text>{{detail.name}}</text></view>
+        <view class="list-detail" wx:key="index" wx:for="{{detail.messages}}" wx:for-item="message">
+          <view class="dot"></view>
+          <view class="list-text">
+            <text>{{message}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
 
     <!--长按识别二维码-->
-    <!-- <view class="qr-view">
-      <image class="qr-icon" mode="aspectFill" src="../../images/pen.png"></image>
+    <view class="qr-view">
+      <image class="qr-icon" mode="aspectFill" src="../../images/qr.png"></image>
       <view><text>长按识别，进入刷卡指南</text></view>
-    </view> -->
+    </view>
   </view>
-  <canvas class="canvas" style="width: {{screenWidth}}px; height: {{listHeight}}px;" canvas-id="firstCanvas"></canvas>
+
+  <canvas class="canvas" style="width: {{screenWidth}}px; height: {{listHeight+20}}px;" canvas-id="firstCanvas"></canvas>
 
     <!--保存图片按钮-->
-    <view class="save-view" bindtap="drawImage">
-      <text>保存图片</text>
-    </view>
+    <cover-view class="save-view" bindtap="savePic">
+      保存图片
+    </cover-view>
 </view>
