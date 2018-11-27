@@ -1,7 +1,8 @@
 //app.js
 import Api from '/utils/api.js';
 App({
-  onLaunch: function () {
+  onLaunch: function (options) {
+    this.globalData.scene = options.scene;
     const that = this;
     // 登录
     wx.login({
@@ -81,6 +82,7 @@ App({
   globalData: {
     userInfo: null,
     openid: null,
-    isExistUser: 0
+    isExistUser: 0,
+    scene: 0
   }
 })

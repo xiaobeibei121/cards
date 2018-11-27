@@ -2,6 +2,8 @@
 import Utils from '../../utils/util.js';
 import Api from '../../utils/api.js';
 
+const app = getApp();
+
 Page({
 
   /**
@@ -11,7 +13,9 @@ Page({
     curDate : "",
     dates: [],
     details: null,
-    curDateText: ""
+    curDateText: "",
+    homeClass: '',
+    scene: app.globalData.scene
   },
 
   /**
@@ -29,7 +33,9 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    if (app.globalData.scene !== 1007) {
+      this.setData({ homeClass: 'hide'});
+    }
   },
 
   /**
@@ -71,9 +77,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    console.log(this.data.curDate)
+    const curDate = this.data.curDate;
+    const curDateArr = curDate.split('-')
     return {
-      path: '/pages/history/history?date='+this.data.curDate
+      title: curDateArr[1] + '月' + curDateArr[2] + '日刷卡指南',
+      path: '/pages/history/history?date=' + this.data.curDate
     }
   },
 
@@ -147,6 +155,15 @@ Page({
     });
     wx.navigateTo({
       url: '../share/share'
+    });
+  },
+
+  /**
+   * 回到主页
+   */
+  toHome: function () {
+    wx.reLaunch({
+      url: "../index/index"
     });
   }
 })

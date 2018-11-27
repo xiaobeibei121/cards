@@ -65,3 +65,20 @@
   color: #999;
   padding-top: 160rpx;
 }
+
+.home-view{
+  position: fixed;
+  right: 50rpx;
+  bottom: 50rpx;
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.home-icon{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.home-view.hide{
+  display: none;
+}

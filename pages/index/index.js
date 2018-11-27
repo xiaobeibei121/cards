@@ -69,7 +69,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    const curDate = new Date();
+    const curDateArr = Utils.formatDay(curDate).split('-')
     return {
+      title: curDateArr[0] + '月' + curDateArr[1] + '日刷卡指南',
       path: '/pages/index/index'
     }
   },

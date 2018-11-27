@@ -23,5 +23,9 @@
   <!--卡片部分-->
   <template-card wx:if="{{details.length != 0}}" bindmyevent="toShareCard"></template-card>
 
+  <!--回到主页-->
+  <view class='home-view {{homeClass}}' bindtap='toHome'>
+    <image class="home-icon" mode="aspectFill" src="../../images/home.png"></image>
+  </view>
 </view>
   
