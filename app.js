@@ -8,20 +8,20 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         // 获取openid
-        // wx.request({
-        //   method: 'GET',
-        //   url: Api.getOpenid,
-        //   data: {code: res.code},
-        //   header: {
-        //     'content-type': 'application/json' // 默认值
-        //   },
-        //   success(response) {
-        //     const res = response.data;
-        //     that.globalData.openid = res.data.openid;
-        //     that.globalData.isExistUser = res.data.isExistUser;
-        //     that.getUserInfo();
-        //   }
-        // });
+        wx.request({
+          method: 'GET',
+          url: Api.getOpenid,
+          data: {code: res.code},
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success(response) {
+            const res = response.data;
+            that.globalData.openid = res.data.openid;
+            that.globalData.isExistUser = res.data.isExistUser;
+            that.getUserInfo();
+          }
+        });
       }
     });
   },
