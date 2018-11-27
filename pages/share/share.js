@@ -56,7 +56,7 @@ Page({
         that.timer = setTimeout(() => {
           that.drawImage();
           clearTimeout(that.timer);
-        }, 1000);
+        }, 300);
       }
     });
   },

@@ -53,7 +53,7 @@ Page({
    */
   navTap: function (event) {
     const tag = event.currentTarget.dataset.tag;
-    this.setData({ toView: "item" + tag });
+    this.setData({ toView: "item" + tag, tag: tag });
   },
 
   /**

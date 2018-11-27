@@ -14,10 +14,9 @@
     </view>
 
     <!--列表部分-->
-    <!-- <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="{{tag}}"></template-banner> -->
     <view class="list-view">
     <view class="list-banner" id="item{{detail.tag}}" wx:key="tag" wx:for="{{details}}" wx:for-item="detail">
-      <view class="list-title" wx:if="{{tag==99}}"><text>{{detail.name}}</text></view>
+      <view class="list-title"><text>{{detail.name}}</text></view>
       <view class="list-detail" wx:key="index" wx:for="{{detail.messages}}" wx:for-item="message">
         <view class="dot"></view>
         <view class="list-text">

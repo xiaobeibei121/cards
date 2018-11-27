@@ -18,7 +18,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.computeDate();
+    if (options.date) {
+      this.computeDate(options.date);
+    } else {
+      this.computeDate();
+    }
   },
 
   /**
@@ -67,15 +71,16 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
+    console.log(this.data.curDate)
     return {
-      path: '/pages/index/index'
+      path: '/pages/history/history?date='+this.data.curDate
     }
   },
 
   /**
    * 计算倒数7天日期
    */
-  computeDate: function () {
+  computeDate: function (date) {
     const curDate = new Date().getTime();
     for (let i = 1; i <= 7; i++) {
       const nextDate = new Date(curDate - 24*60*60*1000*i);
@@ -87,7 +92,13 @@ Page({
       }
       this.data.dates.push({ formatDate: formatDate, formatDay: formatDay});
     }
-    this.setData({ dates: this.data.dates });
+    if (date) {
+      const curDateText = date.split('-')[1] + '月' + date.split('-')[2] + '日';
+      this.setData({ dates: this.data.dates, curDate: date, curDateText: curDateText});
+    } else {
+      this.setData({ dates: this.data.dates });
+    }
+    
     this.getMains();
   },
 
@@ -129,9 +140,10 @@ Page({
    * 生成卡片分享
    */
   toShareCard: function () {
+    const curDateArr = this.data.curDate.split('-');
     wx.setStorage({
       key: 'details',
-      data: { date: this.data.curDateText.replace('月','-'), details: this.data.details }
+      data: { date: [curDateArr[1], curDateArr[2]].join('-'), details: this.data.details }
     });
     wx.navigateTo({
       url: '../share/share'

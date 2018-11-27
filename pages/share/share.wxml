@@ -6,8 +6,6 @@
     </view>
 
     <!--列表部分-->
-    <!-- <template-banner wx:if="{{details.length != 0}}" details="{{details}}" tag="99"></template-banner> -->
-
     <view class="list-view" wx:if="{{details.length != 0}}">
       <view class="list-banner" wx:key="tag" wx:for="{{details}}" wx:for-item="detail">
         <view class="list-title" id="item{{detail.tag}}"><text>{{detail.name}}</text></view>
