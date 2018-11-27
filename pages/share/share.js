@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    details: [{ "name": "推荐", "messages": ["即日起至2018年9月30日，招商银行信用卡用户使用支付宝支付，可享周末双倍积分，奖励积分上限500分。用户需在2018年9月30日前登陆掌上生活APP指定页面领取奖励积分的资格。", "即日起至2018年9月30日，招商银行信用卡用户使用支付宝支付，可享周末双倍积分，奖励积分上限500分。用户需在2018年9月30日前登陆掌上生活APP指定页面领取奖励积分的资格。"], "tag": 0 }, { "name": "招商银行", "messages": ["即日起至2018年9月30日，招商银行信用卡用户使用支付宝支付，可享周末双倍积分，奖励积分上限500分。用户需在2018年9月30日前登陆掌上生活APP指定页面领取奖励积分的资格。"], "tag": 1 }, { "name": "工商银行", "messages": ["即日起至2018年9月30日，招商银行信用卡用户使用支付宝支付，可享周末双倍积分，奖励积分上限500分。用户需在2018年9月30日前登陆掌上生活APP指定页面领取奖励积分的资格。"], "tag": 2 }],
-    curDateText: "11月20",
+    details: [],
+    curDateText: "",
     screenWidth: 0,
     listHeight: 0,
     listTitleRect: [],
@@ -26,31 +26,39 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    //获取用户设备信息，屏幕宽度
-    wx.getSystemInfo({
-      success: res => {
-        this.setData({
-          screenWidth: res.screenWidth
-        });
-      }
-    });
-
     const that = this;
     var query = wx.createSelectorQuery();
-    query.select('.content-view').boundingClientRect(function (rect) {
-      that.setData({ listHeight: rect.height });
+    //读取缓存登录
+    wx.getStorage({
+      key: 'details',
+      success: (res) => {
+        this.setData({ curDateText: res.data.date.replace("-", "月"), details: res.data.details });
+        query.select('.content-view').boundingClientRect(function (rect) {
+          that.setData({ listHeight: rect.height });
 
-    }).exec();
-    query.selectAll('.list-title').boundingClientRect(function (rect) {
-      that.setData({ listTitleRect: rect });
-    }).exec();
-    query.selectAll('.list-detail').boundingClientRect(function (rect) {
-      that.setData({ listDetailRect: rect });
-    }).exec();
+        }).exec();
+        query.selectAll('.list-title').boundingClientRect(function (rect) {
+          that.setData({ listTitleRect: rect });
+        }).exec();
+        query.selectAll('.list-detail').boundingClientRect(function (rect) {
+          that.setData({ listDetailRect: rect });
+        }).exec();
 
-    setTimeout(()=>{
-      that.drawImage();
-    },1000);
+        //获取用户设备信息，屏幕宽度
+        wx.getSystemInfo({
+          success: res => {
+            this.setData({
+              screenWidth: res.screenWidth
+            });
+          }
+        });
+
+        that.timer = setTimeout(() => {
+          that.drawImage();
+          clearTimeout(that.timer);
+        }, 1000);
+      }
+    });
   },
 
   /**
@@ -71,7 +79,7 @@ Page({
 
     context.setFontSize(25);
     context.setFillStyle("#666");
-    context.fillText("11月20日刷卡指南", 15, 55);
+    context.fillText(this.data.curDateText+"日刷卡指南", 15, 55);
 
     const listTitleRect = this.data.listTitleRect;
     for (let i = 0; i < listTitleRect.length; i++) {
@@ -117,15 +125,17 @@ Page({
         index++;
       }
 
-      // 绘制线条
-      context.moveTo(15, initY + 20);
-      context.lineTo(this.data.screenWidth - 15, initY + 20);
-      context.setStrokeStyle("#f0f0f0");
-      context.stroke()
+      if (index !== listDetailRect.length){
+        // 绘制线条
+        context.moveTo(15, initY + 20);
+        context.lineTo(this.data.screenWidth - 15, initY + 20);
+        context.setStrokeStyle("#f0f0f0");
+        context.stroke();
+      }
     }
 
 
-    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 50, this.data.listHeight - 170, 100, 100);
+    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 50, this.data.listHeight - 180, 100, 100);
 
     const text = "长按识别，进入刷卡指南";
     context.setFontSize(12);
@@ -169,18 +179,37 @@ Page({
           filePath: res.tempFilePath,
           //保存成功失败之后，都要隐藏画板，否则影响界面显示。
           success: (res) => {
-            wx.showModal({
-              title: '提示',
-              content: '保存成功',
-              showCancel: false
-            })
+            wx.showToast({
+              title: '保存成功',
+              icon: 'success',
+              duration: 2000
+            });
+            that.timer = setTimeout(()=>{
+              wx.hideToast();
+              clearTimeout(that.timer);
+            },2000);
           },
           fail: (err) => {
+            wx.showToast({
+              title: '保存失败',
+              duration: 2000
+            });
+            that.timer = setTimeout(() => {
+              wx.hideToast();
+              clearTimeout(that.timer);
+            }, 2000);
           }
         })
       },
       fail: (err) => {
-        console.log(err)
+        wx.showToast({
+          title: '绘制失败',
+          duration: 2000
+        });
+        that.timer = setTimeout(() => {
+          wx.hideToast();
+          clearTimeout(that.timer);
+        }, 2000);
       }
     })
   },
@@ -189,13 +218,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    // //读取缓存登录
-    // wx.getStorage({
-    //   key: 'details',
-    //   success: (res) => {
-    //     this.setData({ curDateText: res.data.date.replace("-", "月"), details: res.data.details });
-    //   }
-    // });
   },
 
   /**
@@ -209,7 +231,7 @@ Page({
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    clearTimeout(this.timer);
   },
 
   /**

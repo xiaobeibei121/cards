@@ -10,7 +10,8 @@ Page({
   data: {
     curDate : "",
     dates: [],
-    details: null
+    details: null,
+    curDateText: ""
   },
 
   /**
@@ -123,4 +124,17 @@ Page({
       }
     });
   },
+
+  /**
+   * 生成卡片分享
+   */
+  toShareCard: function () {
+    wx.setStorage({
+      key: 'details',
+      data: { date: this.data.curDateText.replace('月','-'), details: this.data.details }
+    });
+    wx.navigateTo({
+      url: '../share/share'
+    });
+  }
 })
