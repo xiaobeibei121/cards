@@ -28,7 +28,7 @@
 
     <!--列表无数据的情况-->
     <view wx:if="{{details.length == 0}}" class="no-data">
-      <text>sorry，管理员约会去了~</text>
+      <text>sorry，管理员生病了~</text>
     </view>
 
     <!--卡片部分-->

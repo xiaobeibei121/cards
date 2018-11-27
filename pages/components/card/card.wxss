@@ -2,12 +2,11 @@
 .card-view{
   display: flex;
   justify-content: space-between;
-  padding: 30rpx 0 60rpx;
+  padding: 30rpx 0 70rpx;
   background-color: #fff;
 }
 .card-banner{
   width: 250rpx;
-  /* height: 120rpx; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -24,17 +23,7 @@
   height: 60rpx;
 }
 
-.card-icon.card{
-  width: 70rpx;
-  height: 70rpx;
-}
-
-.card-icon.pen{
-  width: 50rpx;
-  height: 50rpx;
-}
-
 .card-title{
   margin-top: 20rpx;
-  font-size: 24rpx;
+  font-size: 26rpx;
 }

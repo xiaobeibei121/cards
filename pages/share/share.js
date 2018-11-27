@@ -77,36 +77,38 @@ Page({
     context.fillStyle = "#fff";
     context.fill();
 
-    context.setFontSize(25);
+    context.setFontSize(30);
     context.setFillStyle("#666");
-    context.fillText(this.data.curDateText+"日刷卡指南", 15, 55);
+    context.fillText(this.data.curDateText+"日刷卡指南", 15, 80);
 
     const listTitleRect = this.data.listTitleRect;
     for (let i = 0; i < listTitleRect.length; i++) {
-      context.setFontSize(16);
+      context.setFontSize(15);
       context.setFillStyle("#333");
-      context.fillText(details[i].name, 15, listTitleRect[i].top + 17);
+      context.font = 'normal bold 15px sans-serif';
+      context.fillText(details[i].name, 15, listTitleRect[i].top + 25);
     }
 
     const listDetailRect = this.data.listDetailRect;
     let index = 0;
     for (let i = 0; i < details.length; i++) {
-      context.setFontSize(14);
+      context.setFontSize(15);
       context.setFillStyle("#333");
+      context.font = 'normal 300 15px sans-serif';
       const messages = details[i].messages;
       let initY;
       for (let j = 0; j < messages.length; j++){
-        initY = listDetailRect[index].top + 15;
+        initY = listDetailRect[index].top + 25;
 
         // 绘制圆点
         context.beginPath();
-        context.arc(19, initY - 6 , 4, 0, 2 * Math.PI);
+        context.arc(19, initY - 7 , 3, 0, 2 * Math.PI);
         context.fill();
 
         // 绘制文字
         let lineWidth = 0;
         const str = messages[j];
-        const lineHeight = 20;
+        const lineHeight = 30;
         const canvasWidth = this.data.screenWidth - 50;
         let lastSubStrIndex = 0;
 
@@ -125,23 +127,22 @@ Page({
         index++;
       }
 
-      if (index !== listDetailRect.length){
-        // 绘制线条
-        context.moveTo(15, initY + 20);
-        context.lineTo(this.data.screenWidth - 15, initY + 20);
-        context.setStrokeStyle("#f0f0f0");
-        context.stroke();
-      }
+      // if (index !== listDetailRect.length){
+      //   // 绘制线条
+      //   context.moveTo(15, initY + 20);
+      //   context.lineTo(this.data.screenWidth - 15, initY + 20);
+      //   context.setStrokeStyle("#f0f0f0");
+      //   context.stroke();
+      // }
     }
 
 
-    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 50, this.data.listHeight - 180, 100, 100);
+    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 50, this.data.listHeight - 220, 100, 100);
 
     const text = "长按识别，进入刷卡指南";
     context.setFontSize(12);
     context.setFillStyle("#666");
-    context.setTextAlign('center');
-    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width)/2, this.data.listHeight - 50);
+    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width*11)/2, this.data.listHeight - 90);
 
     context.draw(false,function(){
       that.setData({ contentClass: 'hide'});
@@ -158,9 +159,9 @@ Page({
       x: 0,
       y: 0,
       width: unit * 375,
-      height: that.data.listHeight,
+      height: that.data.listHeight-20,
       destWidth: unit * 375,
-      destHeight: that.data.listHeight,
+      destHeight: that.data.listHeight - 20,
       canvasId: 'firstCanvas',
       success: function (res) {
         that.setData({
