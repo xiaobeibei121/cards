@@ -160,8 +160,8 @@ Page({
       y: 0,
       width: unit * 375,
       height: that.data.listHeight-20,
-      destWidth: unit * 375,
-      destHeight: that.data.listHeight - 20,
+      destWidth: unit * 375 * 2,
+      destHeight: (that.data.listHeight - 20) * 2,
       canvasId: 'firstCanvas',
       success: function (res) {
         that.setData({
