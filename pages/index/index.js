@@ -44,7 +44,6 @@ Page({
         if (res.errorCode === 0) {
           that.setData({ details: res.data.details});
         }
-        console.log(JSON.stringify(res.data.details))
       }
     });
   },
