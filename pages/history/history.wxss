@@ -68,15 +68,17 @@
 
 .home-view{
   position: fixed;
-  right: 50rpx;
-  bottom: 50rpx;
-  width: 60rpx;
-  height: 60rpx;
+  right: 80rpx;
+  bottom: 120rpx;
+  width: 80rpx;
+  height: 80rpx;
+  background-color: #fff;
+  border-radius: 50%;
 }
 
 .home-icon{
-  width: 60rpx;
-  height: 60rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 
 .home-view.hide{

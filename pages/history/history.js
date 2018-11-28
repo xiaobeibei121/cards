@@ -15,7 +15,6 @@ Page({
     details: null,
     curDateText: "",
     homeClass: '',
-    scene: app.globalData.scene
   },
 
   /**
@@ -25,6 +24,7 @@ Page({
     if (options.date) {
       this.computeDate(options.date);
     } else {
+      this.setData({ homeClass: 'hide' });
       this.computeDate();
     }
   },
@@ -33,9 +33,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    if (app.globalData.scene !== 1007) {
-      this.setData({ homeClass: 'hide'});
-    }
   },
 
   /**

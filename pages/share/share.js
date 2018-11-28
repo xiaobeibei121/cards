@@ -181,7 +181,7 @@ Page({
           //保存成功失败之后，都要隐藏画板，否则影响界面显示。
           success: (res) => {
             wx.showToast({
-              title: '保存成功',
+              title: '已保存到相册',
               icon: 'success',
               duration: 2000
             });
