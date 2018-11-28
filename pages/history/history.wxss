@@ -70,15 +70,15 @@
   position: fixed;
   right: 80rpx;
   bottom: 120rpx;
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
   background-color: #fff;
   border-radius: 50%;
 }
 
 .home-icon{
-  width: 80rpx;
-  height: 80rpx;
+  width: 90rpx;
+  height: 90rpx;
 }
 
 .home-view.hide{
