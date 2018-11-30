@@ -137,12 +137,12 @@ Page({
     }
 
 
-    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 50, this.data.listHeight - 220, 100, 100);
+    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 70, this.data.listHeight - 240, 140, 140);
 
     const text = "长按识别，进入刷卡指南";
     context.setFontSize(12);
     context.setFillStyle("#666");
-    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width*11)/2, this.data.listHeight - 90);
+    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width*11)/2, this.data.listHeight - 70);
 
     context.draw(false,function(){
       that.setData({ contentClass: 'hide'});
