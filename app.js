@@ -82,6 +82,7 @@ App({
       wx.request({
         method: 'POST',
         url: Api.user + '?openid='+that.globalData.openid,
+        data: { ...that.globalData.userInfo, openid: that.globalData.openid },
         header: {
           'content-type': 'application/json' // 默认值
         },
