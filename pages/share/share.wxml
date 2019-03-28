@@ -25,7 +25,7 @@
     </view>
   </view>
 
-  <canvas class="canvas" style="width: {{screenWidth}}px; height: {{listHeight+20}}px;" canvas-id="firstCanvas"></canvas>
+  <canvas class="canvas" style="width: {{screenWidth}}px; height: 550px;" canvas-id="firstCanvas"></canvas>
 
     <!--保存图片按钮-->
     <cover-view class="save-view" bindtap="savePic">

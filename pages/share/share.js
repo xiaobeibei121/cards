@@ -73,7 +73,8 @@ Page({
     var context = wx.createCanvasContext('firstCanvas')
     const unit = this.data.screenWidth / 375;
     context.beginPath();
-    context.rect(0, 0, this.data.screenWidth, this.data.listHeight);
+    // context.rect(0, 0, this.data.screenWidth, this.data.listHeight);
+    context.rect(0, 0, this.data.screenWidth, 550);
     context.fillStyle = "#fff";
     context.fill();
 
@@ -82,7 +83,7 @@ Page({
     context.fillText(this.data.curDateText+"日刷卡指南", 15, 80);
 
     const listTitleRect = this.data.listTitleRect;
-    for (let i = 0; i < listTitleRect.length; i++) {
+    for (let i = 0; i < 1; i++) { // listTitleRect.length
       context.setFontSize(15);
       context.setFillStyle("#333");
       context.font = 'normal bold 15px sans-serif';
@@ -91,13 +92,13 @@ Page({
 
     const listDetailRect = this.data.listDetailRect;
     let index = 0;
-    for (let i = 0; i < details.length; i++) {
+    for (let i = 0; i < 1; i++) { // details.length
       context.setFontSize(15);
       context.setFillStyle("#333");
       context.font = 'normal 300 15px sans-serif';
       const messages = details[i].messages;
       let initY;
-      for (let j = 0; j < messages.length; j++){
+      for (let j = 0; j < 1; j++) { // messages.length
         initY = listDetailRect[index].top + 25;
 
         // 绘制圆点
@@ -109,7 +110,7 @@ Page({
         let lineWidth = 0;
         const str = messages[j];
         const lineHeight = 30;
-        const canvasWidth = this.data.screenWidth - 50;
+        const canvasWidth = this.data.screenWidth - 60;
         let lastSubStrIndex = 0;
 
         for (let a = 0; a < str.length; a++) {
@@ -136,13 +137,14 @@ Page({
       // }
     }
 
+    // context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 70, this.data.listHeight - 240, 140, 140);
+    context.drawImage('../../images/qr.png', this.data.screenWidth / 2 - 70, 310, 140, 140);
 
-    context.drawImage('../../images/qr.png',this.data.screenWidth/2 - 70, this.data.listHeight - 240, 140, 140);
-
-    const text = "长按识别，进入刷卡指南";
+    const text = "想了解更多，长按识别，进入刷卡指南";
     context.setFontSize(12);
     context.setFillStyle("#666");
-    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width*11)/2, this.data.listHeight - 70);
+    // context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width*11)/2, this.data.listHeight - 70);
+    context.fillText(text, (this.data.screenWidth - context.measureText(text[0]).width * 17) / 2, 470);
 
     context.draw(false,function(){
       that.setData({ contentClass: 'hide'});
@@ -159,9 +161,11 @@ Page({
       x: 0,
       y: 0,
       width: unit * 375,
-      height: that.data.listHeight-20,
+      // height: that.data.listHeight-20,
+      height: 550,
       destWidth: unit * 375 * 2,
-      destHeight: (that.data.listHeight - 20) * 2,
+      // destHeight: (that.data.listHeight - 20) * 2,
+      destHeight: 1100,
       canvasId: 'firstCanvas',
       success: function (res) {
         that.setData({
